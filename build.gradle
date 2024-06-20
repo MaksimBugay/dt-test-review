@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+}
+
+group 'com.dynatrace'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.sun.jersey:jersey-core:1.18.1"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'junit:junit:4.13'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task zip(type: Zip) {
+    from ('.')
+    include '*.gradle'
+    include 'src/main/**'
+    include 'src/test/java'
+    archiveName 'persons_and_cities.zip'
+    destinationDir file("build")
+}
